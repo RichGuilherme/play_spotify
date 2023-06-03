@@ -7,26 +7,26 @@ import imgMusic from '../assets/Skærmbillede 2016-12-08 kl. 10.49.01 AM.png'
 import musica from '../assets/My_Curse_256k.mp3'
 
 
+
 export const Main = () => {
-    const audioMusic = useRef(null)
+    const audioMusic = useRef<HTMLAudioElement>(null)
     const [playing, setPlaying] = useState(false);
-    const [progress, setProgress] = useState(0)
+    const [progress, setProgress] = useState<number | undefined>(0)
     const [startTime, setStartTime] = useState<string>("0:00")
     const [durationAudio, setDurationAudio] = useState<string>("0:00")
 
 
-    const handlePlayChange = () => {
+    const handlePlayChange = (): void => {
         setPlaying(!playing);
     };
    
 
-
     useEffect(() => {
         setInterval(() => {
-            setProgress(Math.floor((audioMusic.current?.currentTime / audioMusic.current?.duration) * 100))
+            setProgress(Math.floor(((audioMusic.current?.currentTime || 0) / (audioMusic.current?.duration || 0)) * 100))
 
-            const currentTime = Math.floor(audioMusic?.current?.currentTime)
-            const duration = Math.floor(audioMusic?.current?.duration)
+            const currentTime = Math.floor(audioMusic?.current?.currentTime || 0)
+            const duration = Math.floor(audioMusic?.current?.duration || 0)
 
             const secondForMin = (second = 0) => {
                 const campoMinutos = String(Math.floor(second / 60));
@@ -51,6 +51,7 @@ export const Main = () => {
             audioMusic.current?.pause()
         }
     }, )
+
 
 
 

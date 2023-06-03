@@ -5,14 +5,13 @@ import { IoIosPlay, IoIosSkipBackward, IoIosSkipForward } from 'react-icons/io'
 
 
 type playProps = {
-    onPlayChange: FunctionConstructor,
+    onPlayChange: () => void ,
     playing: boolean
 }
-
 export const Play = ({onPlayChange = Function, playing = false}:
     playProps) => {
 
-    const handlePlay = () => {
+    const handlePlay = (): void => {
         onPlayChange()
     }
 
